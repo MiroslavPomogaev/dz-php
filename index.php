@@ -1,15 +1,28 @@
 <?php
-echo __FILE__ . "<br/>";
-echo __LINE__ . "<br/>";
+echo "Введите первое число: " . PHP_EOL;
 
+do {
+  $number1 = trim(fgets(STDIN));
+  if (is_numeric($number1) === false) {  
+  fwrite(STDERR, "Введите пожалуйста число" . PHP_EOL);
+  } 
+} while (is_numeric($number1) === false);
 
-$str='переменной';
-echo<<<HERE
-  Создание многострочной $str при помощи heredoc синтаксиса.<br/>
-HERE;
+echo "Введите второе число:" . PHP_EOL;
 
+do {
+  $number2 = trim(fgets(STDIN));
 
-$a='Рыба';
-$b='человек';
+  if (is_numeric($number2) === false) {  
+    fwrite(STDERR, "Введите пожалуйста число" . PHP_EOL);
+    } 
 
-echo "$a рыбою сыта, а $b человеком";
+  elseif ((int)$number2 === 0) {
+    fwrite(STDERR, "Делить на 0 нельзя" . PHP_EOL);
+    $number2 = trim(fgets(STDIN));
+  }
+
+}
+  while ((int)$number2 === 0 || is_numeric($number2) === false);
+
+fwrite(STDOUT, "Результат вычисления: " . $number1/$number2);
